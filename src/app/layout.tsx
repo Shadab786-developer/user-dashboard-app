@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useRouter } from "next/navigation";
 import { ThemeProvider } from "next-themes";
 import { ThemeToggle } from "./theam-toggl";
-import { Button } from "@/components/ui/button";
 import "./globals.css";
 
 const Sidebar = styled.aside`

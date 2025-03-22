@@ -22,7 +22,7 @@ export default function Dashboard() {
         setPosts(data);
         setFilteredData(data);
       })
-      .catch((err) => setError("Failed to load data"));
+      .catch(() => setError("Failed to load data"));
   }, []);
 
   useEffect(() => {
