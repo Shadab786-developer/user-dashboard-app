@@ -1,6 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Post } from "@/index.ts";
+type Post = {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+};
 
 async function getData() {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
