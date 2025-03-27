@@ -1,21 +1,22 @@
 "use client";
-import styled from "styled-components";
 import { useRouter } from "next/navigation";
 import { ThemeProvider } from "next-themes";
 import { ThemeToggle } from "./theam-toggl";
 import "./globals.css";
 import Image from "next/image";
 import { Provider } from "react-redux";
-import { store } from "../Store/Store";
+import { store } from "../Store/Store.ts";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    localStorage.removeItem("password");
-    router.push("/login");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
+      localStorage.removeItem("password");
+      router.push("/login");
+    }
   };
 
   return (

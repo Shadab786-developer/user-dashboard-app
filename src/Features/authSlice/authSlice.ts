@@ -10,25 +10,30 @@ interface AuthState {
 }
 
 const getStoredAuthData = () => {
-  const token = localStorage.getItem("token");
-  const email = localStorage.getItem("email");
-  const password = localStorage.getItem("password");
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("token");
+    const email = localStorage.getItem("email");
+    const password = localStorage.getItem("password");
+    return { token, email, password };
+  }
 
   return {
-    isAuthenticated: !!token,
-    token: token,
-    user:
-      email && password
-        ? {
-            email: email,
-            password: password,
-          }
-        : null,
+    token: null,
+    email: null,
+    password: null,
   };
 };
 
 const initialState: AuthState = {
-  ...getStoredAuthData(),
+  isAuthenticated: false,
+  token: getStoredAuthData().token,
+  user:
+    getStoredAuthData().email && getStoredAuthData().password
+      ? {
+          email: getStoredAuthData().email,
+          password: getStoredAuthData().password,
+        }
+      : null,
 };
 
 const authSlice = createSlice({
