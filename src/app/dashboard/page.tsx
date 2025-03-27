@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "@/Hooks/hooks";
 type Post = {
   userId: number;
   id: number;
@@ -16,6 +17,7 @@ async function getData() {
 }
 
 export default function Dashboard() {
+  const user = useAppSelector((state) => state.auth);
   const [searchTerm, setSearchTerm] = useState("");
   const [posts, setPosts] = useState<Post[]>([]);
   const [error, setError] = useState("");
@@ -45,7 +47,10 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="mb-4">
+      <div className="mb-4 w-full sm:pl-[30%] pl-[50%] mt-4">
+        <h2 className="text-4xl font-sans font-extrabold text-gray-400 text-center">
+          Welcome {user.user?.email}
+        </h2>
         <input
           type="text"
           placeholder="Search by title or ID"
@@ -55,7 +60,7 @@ export default function Dashboard() {
         />
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-full sm:ml-[30%] ml-[50%]">
         <table className="min-w-full divide-y divide-gray-200 text-black">
           <thead className="bg-gray-50">
             <tr>

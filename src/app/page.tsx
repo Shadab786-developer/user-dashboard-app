@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
+import { login } from "@/Features/authSlice/authSlice";
+import { useAppDispatch } from "@/Hooks/hooks";
 import "./globals.css";
 
 const LoginContainer = styled.div`
@@ -13,6 +15,7 @@ const LoginContainer = styled.div`
 `;
 
 export default function Login() {
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -35,12 +38,19 @@ export default function Login() {
     if (!validateForm()) return;
 
     localStorage.setItem("token", "mock-jwt-token");
+    dispatch(
+      login({
+        email: email,
+        token: "mock-jwt-token",
+        password: password,
+      })
+    );
     router.push("/dashboard");
   };
 
   return (
     <LoginContainer>
-      <div className="bg-gray-700 p-8 rounded-lg shadow-md w-96">
+      <div className="bg-gray-700 p-8 rounded-lg shadow-md w-4xl sm:ml-[30%] ml-[50%]">
         <h1 className="text-2xl font-bold mb-6">Login</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
