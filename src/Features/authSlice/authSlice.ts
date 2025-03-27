@@ -9,14 +9,17 @@ interface AuthState {
   } | null;
 }
 
-const getStoredAuthData = () => {
+const getStoredAuthData = (): {
+  token: string | null;
+  email: string | null;
+  password: string | null;
+} => {
   if (typeof window !== "undefined") {
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
     const password = localStorage.getItem("password");
     return { token, email, password };
   }
-
   return {
     token: null,
     email: null,
@@ -30,12 +33,11 @@ const initialState: AuthState = {
   user:
     getStoredAuthData().email && getStoredAuthData().password
       ? {
-          email: getStoredAuthData().email,
-          password: getStoredAuthData().password,
+          email: getStoredAuthData().email as string,
+          password: getStoredAuthData().password as string,
         }
       : null,
 };
-
 const authSlice = createSlice({
   name: "auth",
   initialState,

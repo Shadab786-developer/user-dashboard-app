@@ -5,7 +5,7 @@ import { ThemeToggle } from "./theam-toggl";
 import "./globals.css";
 import Image from "next/image";
 import { Provider } from "react-redux";
-import { store } from "../Store/Store.ts";
+import { store } from "../Store/store";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();

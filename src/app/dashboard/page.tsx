@@ -48,9 +48,9 @@ export default function Dashboard() {
   return (
     <>
       <div className="mb-4 w-full sm:pl-[30%] pl-[50%] mt-4">
-        <h2 className="text-4xl font-sans font-extrabold text-gray-400 text-center">
+        <span className="text-4xl font-sans font-extrabold text-gray-400 text-center">
           Welcome {user.user?.email}
-        </h2>
+        </span>
         <input
           type="text"
           placeholder="Search by title or ID"
